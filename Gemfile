@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
-gem 'sinatra'
+gem 'sinatra', ">= 2.0.2"
 gem 'line-bot-api'
 gem 'dotenv-rails'
