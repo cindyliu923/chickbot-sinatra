@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
-gem 'sinatra', ">= 2.0.2"
-gem 'line-bot-api'
 gem 'dotenv-rails'
+gem 'line-bot-api'
 gem 'pry'
+gem 'sinatra', '>= 2.0.2'

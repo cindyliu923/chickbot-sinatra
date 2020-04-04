@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'sinatra'
 require 'line/bot'
@@ -8,7 +9,7 @@ require './receiver'
 require './replier'
 
 post '/chick/webhook' do
-  response = line.reply_message(receiver.reply_token, replier.reply)
+  line.reply_message(receiver.reply_token, replier.reply)
 
   :ok
 end
@@ -16,10 +17,10 @@ end
 private
 
 def line
-  @line ||= Line::Bot::Client.new { |config|
+  @line ||= Line::Bot::Client.new do |config|
     config.channel_secret = ENV['LINE_SECRET']
     config.channel_token = ENV['LINE_TOKEN']
-  }
+  end
 end
 
 def line_params

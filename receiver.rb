@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Receiver from line
 class Receiver
   def initialize(params)
     @params = params
