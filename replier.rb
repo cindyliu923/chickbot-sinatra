@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'nokogiri'
+require 'open-uri'
+
 # Replier to line
 class Replier
   TEXT = 'text'
@@ -20,24 +23,42 @@ class Replier
   end
 
   def reply
-    return text if @type == TEXT
     return sticker if @type == SITICKER
+    return text if @type == TEXT
   end
 
   private
 
+  def sticker
+    {
+      type: SITICKER,
+      packageId: '11537',
+      stickerId: SITICKER_ID.sample
+    }
+  end
+
   def text
-    { type: TEXT,
-      text: keyword_reply }
+    {
+      type: TEXT,
+      text: keyword_reply
+    }
   end
 
   def keyword_reply
+    return find_song if @message[TEXT].start_with?('找歌')
+
     @message[TEXT].tr('嗎', '').tr('?？', '!！')
   end
 
-  def sticker
-    { type: SITICKER,
-      packageId: '11537',
-      stickerId: SITICKER_ID.sample }
+  def find_song
+    uri = URI('https://www.clubdam.com/app/search/searchKeywordKaraoke.html')
+    keyword = @message[TEXT].delete_prefix('找歌').strip
+    params = { searchType: 1, keyword: keyword }
+    uri.query = URI.encode_www_form(params)
+
+    doc = Nokogiri::HTML(Kernel.open(uri))
+
+    # table.list td.song
+    doc.css('#content table.list').map(&:content).first || 'no song'
   end
 end
