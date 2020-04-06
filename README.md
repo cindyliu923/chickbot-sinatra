@@ -8,7 +8,8 @@ An easy chatbot with [Sinatra](http://sinatrarb.com/)
 - 隨機圖片回覆
 - 從 [DAM CHANNEL](https://www.clubdam.com) 找歌
   - 用 '找歌' 開頭的字串加上歌曲名稱，找到歌曲資訊及編號
-  
-![](https://qr-official.line.me/sid/M/qgk0031u.png)
+
+## 掃描 QR code 加入好友  
+![qrcode](https://i.imgur.com/XmPXvz1.png)
 
 ![examlpe](https://i.imgur.com/MgkoMCL.jpg)
