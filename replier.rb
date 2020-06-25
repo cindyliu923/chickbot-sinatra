@@ -23,8 +23,7 @@ class Replier
   end
 
   def reply
-    return sticker if @type == SITICKER
-    return text if @type == TEXT
+    send(@type)
   end
 
   private
