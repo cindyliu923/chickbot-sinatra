@@ -46,7 +46,7 @@ class Replier
   def keyword_reply
     return find_song if @message[TEXT].start_with?('找歌')
 
-    @message[TEXT].tr('嗎', '').tr('?？', '!！')+'笑死！'
+    @message[TEXT].tr('嗎', '').tr('?？', '!！')+' 笑死！'
   end
 
   def find_song
