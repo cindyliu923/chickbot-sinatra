@@ -25,6 +25,11 @@ class  Ai
         { role: 'user', parts: { text: message } }
       ]
     })
-    results.map { |result| result['candidates'][0]['content']['parts'][0]['text'] }.join('')
+
+    if results[0]['promptFeedback']['blockReason']
+      '咕咕！出惹點差錯'
+    else
+      results.map { |result| result['candidates'][0]['content']['parts'][0]['text'] }.join('')
+    end
   end
 end
