@@ -7,6 +7,7 @@ require 'dotenv/load'
 require 'pry'
 require './receiver'
 require './replier'
+require './ai'
 
 post '/chick/webhook' do
   line.reply_message(receiver.reply_token, replier.reply)
@@ -32,5 +33,9 @@ def receiver
 end
 
 def replier
-  @replier ||= Replier.new(receiver.message)
+  @replier ||= Replier.new(receiver.message, ai)
+end
+
+def ai
+  @ai ||= Ai.new(ENV['GOOGLE_API_KEY'])
 end

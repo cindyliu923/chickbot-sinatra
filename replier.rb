@@ -17,8 +17,9 @@ class Replier
     52002770 52002771 52002772 52002773
   ].freeze
 
-  def initialize(message)
+  def initialize(message, ai = nil)
     @message = message
+    @ai = ai
     @type = message['type']
   end
 
@@ -44,6 +45,7 @@ class Replier
   end
 
   def keyword_reply
+    return @ai.send_message(@message[TEXT].delete_prefix('找AI').strip) if @message[TEXT].start_with?('找AI')
     return find_song if @message[TEXT].start_with?('找歌')
 
     @message[TEXT].tr('嗎', '').tr('?？', '!！')+' 笑死！'
