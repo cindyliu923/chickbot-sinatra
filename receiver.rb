@@ -14,6 +14,10 @@ class Receiver
     @reply_token ||= event['replyToken']
   end
 
+  def user_id
+    @user_id ||= event['source']['userId']
+  end
+
   private
 
   def event

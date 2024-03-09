@@ -10,6 +10,8 @@ require './replier'
 require './ai'
 
 post '/chick/webhook' do
+  # line.push_message(receiver.user_id, { type: 'text', text: 'push messages' })
+  # https://tw.linebiz.com/column/LINEOA-2023-Price-Plan/
   line.reply_message(receiver.reply_token, replier.reply)
 
   :ok

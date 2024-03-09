@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'nokogiri'
-require 'open-uri'
-
 # Replier to line
 class Replier
   TEXT = 'text'
@@ -46,20 +43,7 @@ class Replier
 
   def keyword_reply
     return @ai.send_message(@message[TEXT].delete_prefix('找AI').strip) if @message[TEXT].start_with?('找AI')
-    return find_song if @message[TEXT].start_with?('找歌')
 
     @message[TEXT].tr('嗎', '').tr('?？', '!！')+' 笑死！'
-  end
-
-  def find_song
-    uri = URI('https://www.clubdam.com/app/search/searchKeywordKaraoke.html')
-    keyword = @message[TEXT].delete_prefix('找歌').strip
-    params = { searchType: 1, keyword: keyword }
-    uri.query = URI.encode_www_form(params)
-
-    doc = Nokogiri::HTML(Kernel.open(uri))
-
-    # table.list td.song
-    doc.css('#content table.list').map(&:content).first || 'no song'
   end
 end
