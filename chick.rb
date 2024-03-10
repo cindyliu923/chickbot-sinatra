@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'dotenv/load' if ENV['RACK_ENV'] == 'development'
+
 require 'sinatra'
 require 'line/bot'
-require 'dotenv/load'
 require 'pry'
 require './receiver'
 require './replier'
